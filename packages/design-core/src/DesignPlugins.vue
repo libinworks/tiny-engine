@@ -119,6 +119,7 @@ export default {
     const robotVisible = ref(false)
     const robotComponent = ref(null)
     const { isTemporaryPage } = usePage()
+    const HELP_PLUGIN_ID = 'EditorHelp'
 
     const {
       pluginState,
@@ -153,6 +154,7 @@ export default {
     }
 
     const clickMenu = ({ item, index }) => {
+      if (item.id === HELP_PLUGIN_ID) return
       state.prevIdex = index
 
       // 切换插件与关闭插件时确认
@@ -220,7 +222,7 @@ export default {
 
 <style lang="less" scoped>
 #tiny-engine-left-panel {
-  width: var(--base-left-panel-width, 268px);
+  width: var(--base-left-panel-width);
   height: calc(100vh - var(--base-top-panel-height));
   border-right: 1px solid var(--ti-lowcode-plugin-panel-border-right-color);
   background: var(--ti-lowcode-common-component-bg);

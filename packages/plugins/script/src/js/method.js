@@ -26,7 +26,8 @@ const state = reactive({
   script: '',
   isChanged: false,
   hasError: false,
-  editorSelection: null
+  editorSelection: null,
+  completionProvider: null
 })
 
 const monaco = ref(null)
@@ -111,7 +112,7 @@ const saveMethods = () => {
 
     const content = formatString(ast2String(declaration).trim(), 'javascript')
     // libin
-    console.log('save js content', content);
+    // console.log('save js content', content);
 
     saveMethod({ name, content })
   })
