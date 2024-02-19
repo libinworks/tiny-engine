@@ -11,15 +11,17 @@
  */
 
 import { reactive, ref } from 'vue'
-import { useBlock, useCanvas, useLayout, useNotify, usePage } from '@opentiny/tiny-engine-controller'
+// import { useBlock, useCanvas, useLayout, useNotify, usePage } from '@opentiny/tiny-engine-controller'
+import { useBlock, useCanvas, useLayout, usePage } from '@opentiny/tiny-engine-controller'
 import { getSchema, setSchema, selectNode } from '@opentiny/tiny-engine-canvas'
-import { constants } from '@opentiny/tiny-engine-utils'
-import { handlePageUpdate } from '@opentiny/tiny-engine-common/js/http'
+// import { constants } from '@opentiny/tiny-engine-utils'
+// import { handlePageUpdate } from '@opentiny/tiny-engine-common/js/http'
 
-const { pageState, isSaved, isBlock } = useCanvas()
+// const { pageState, isSaved, isBlock } = useCanvas()
+const { pageState, isBlock } = useCanvas()
 const { PLUGIN_NAME, getPluginApi } = useLayout()
 const { getCurrentBlock } = useBlock()
-const { PAGE_STATUS } = constants
+// const { PAGE_STATUS } = constants
 const { pageSettingState, isTemporaryPage } = usePage()
 const state = reactive({
   visible: false,
@@ -46,13 +48,15 @@ const saveBlock = async (pageSchema) => {
 }
 
 const savePage = async (pageSchema) => {
-  const { currentPage } = pageState
-  const params = {
-    page_content: pageSchema
-  }
+  // const { currentPage } = pageState
+  // const params = {
+  //   page_content: pageSchema
+  // }
 
   isLoading.value = true
-  await handlePageUpdate(currentPage.id, { ...currentPage, ...params })
+  // libin
+  window.parent.postMessage({ type: 'tiny-engine-save', value: pageSchema }, '*')
+  // await handlePageUpdate(currentPage.id, { ...currentPage, ...params })
   isLoading.value = false
 }
 
@@ -83,31 +87,32 @@ export const saveCommon = (value) => {
   return isBlock() ? saveBlock(pageSchema) : savePage(pageSchema)
 }
 export const openCommon = async () => {
-  if (isSaved() || state.disabled) {
-    return
-  }
+  // libin
+  // if (isSaved() || state.disabled) {
+  //   return
+  // }
 
-  const pageStatus = useLayout().layoutState?.pageStatus
-  const curPageState = pageStatus?.state
-  const pageInfo = pageStatus?.data
-  const ERR_MSG = {
-    [PAGE_STATUS.Release]: '当前页面未锁定，请先锁定再保存',
-    [PAGE_STATUS.Empty]: '当前应用无页面，请先新建页面再保存',
-    [PAGE_STATUS.Guest]: '官网演示应用不能保存页面，如需体验请切换应用',
-    [PAGE_STATUS.Lock]: `当前页面被 ${pageInfo?.username} ${pageInfo?.resetPasswordToken} 锁定，如需编辑请先联系他解锁文件，然后再锁定该页面后编辑！`
-  }
+  // const pageStatus = useLayout().layoutState?.pageStatus
+  // const curPageState = pageStatus?.state
+  // const pageInfo = pageStatus?.data
+  // const ERR_MSG = {
+  //   [PAGE_STATUS.Release]: '当前页面未锁定，请先锁定再保存',
+  //   [PAGE_STATUS.Empty]: '当前应用无页面，请先新建页面再保存',
+  //   [PAGE_STATUS.Guest]: '官网演示应用不能保存页面，如需体验请切换应用',
+  //   [PAGE_STATUS.Lock]: `当前页面被 ${pageInfo?.username} ${pageInfo?.resetPasswordToken} 锁定，如需编辑请先联系他解锁文件，然后再锁定该页面后编辑！`
+  // }
 
-  if ([PAGE_STATUS.Release, PAGE_STATUS.Empty, PAGE_STATUS.Guest, PAGE_STATUS.Lock].includes(curPageState)) {
-    useNotify({
-      type: 'error',
-      title: '保存失败',
-      message: ERR_MSG[curPageState]
-    })
+  // if ([PAGE_STATUS.Release, PAGE_STATUS.Empty, PAGE_STATUS.Guest, PAGE_STATUS.Lock].includes(curPageState)) {
+  //   useNotify({
+  //     type: 'error',
+  //     title: '保存失败',
+  //     message: ERR_MSG[curPageState]
+  //   })
 
-    return
-  }
+  //   return
+  // }
 
-  state.disabled = true
+  // state.disabled = true
 
   const pageSchema = getSchema()
 

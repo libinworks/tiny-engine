@@ -11,19 +11,19 @@
  */
 
 import Breadcrumb from '@opentiny/tiny-engine-toolbar-breadcrumb'
-import Fullscreen from '@opentiny/tiny-engine-toolbar-fullscreen'
-import Lang from '@opentiny/tiny-engine-toolbar-lang'
-import Checkinout from '@opentiny/tiny-engine-toolbar-checkinout'
+// import Fullscreen from '@opentiny/tiny-engine-toolbar-fullscreen'
+// import Lang from '@opentiny/tiny-engine-toolbar-lang'
+// import Checkinout from '@opentiny/tiny-engine-toolbar-checkinout'
 import Logo from '@opentiny/tiny-engine-toolbar-logo'
 import Media from '@opentiny/tiny-engine-toolbar-media'
-import Redoundo from '@opentiny/tiny-engine-toolbar-redoundo'
+// import Redoundo from '@opentiny/tiny-engine-toolbar-redoundo'
 import Save from '@opentiny/tiny-engine-toolbar-save'
-import Clean from '@opentiny/tiny-engine-toolbar-clean'
+// import Clean from '@opentiny/tiny-engine-toolbar-clean'
 import Preview from '@opentiny/tiny-engine-toolbar-preview'
-import GenerateVue from '@opentiny/tiny-engine-toolbar-generate-vue'
-import Refresh from '@opentiny/tiny-engine-toolbar-refresh'
-import Collaboration from '@opentiny/tiny-engine-toolbar-collaboration'
-import Setting from '@opentiny/tiny-engine-toolbar-setting'
+// import GenerateVue from '@opentiny/tiny-engine-toolbar-generate-vue'
+// import Refresh from '@opentiny/tiny-engine-toolbar-refresh'
+// import Collaboration from '@opentiny/tiny-engine-toolbar-collaboration'
+// import Setting from '@opentiny/tiny-engine-toolbar-setting'
 
 import Materials from '@opentiny/tiny-engine-plugin-materials'
 import Data from '@opentiny/tiny-engine-plugin-data'
@@ -48,21 +48,22 @@ const addons = {
   // libin
   // plugins: [Materials, Tree, Page, Block, Datasource, Bridge, I18n, Script, Data, Schema, Help, Robot],
   plugins: [Materials, Tree, Page, Block, Datasource, Bridge, I18n, Script, Data, Schema, Robot],
+  // libin
   toolbars: [
     Logo,
     Breadcrumb,
     Media,
-    Collaboration,
-    Clean,
-    Refresh,
+    // Collaboration,
+    // Clean,
+    // Refresh,
     Save,
-    GenerateVue,
-    Preview,
-    Redoundo,
-    Fullscreen,
-    Checkinout,
-    Setting,
-    Lang
+    // GenerateVue,
+    Preview
+    // Redoundo,
+    // Fullscreen,
+    // Checkinout,
+    // Setting,
+    // Lang
   ],
   settings: [Props, Styles, Events]
 }

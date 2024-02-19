@@ -12,10 +12,12 @@
 import { onMounted, reactive, watch, provide, computed } from 'vue'
 import { Search } from '@opentiny/vue'
 import { iconSearch } from '@opentiny/vue-icon'
-import { useApp, useBlock, useModal, useResource } from '@opentiny/tiny-engine-controller'
+// import { useApp, useBlock, useModal, useResource } from '@opentiny/tiny-engine-controller'
+import { useBlock, useModal, useResource } from '@opentiny/tiny-engine-controller'
 import BlockGroup from './BlockGroup.vue'
 import BlockList from './BlockList.vue'
-import { fetchGroups, fetchGroupBlocksById, fetchGroupBlocksByIds } from './http'
+// import { fetchGroups, fetchGroupBlocksById, fetchGroupBlocksByIds } from './http'
+import { fetchGroupBlocksById, fetchGroupBlocksByIds } from './http'
 
 export default {
   components: {
@@ -25,10 +27,11 @@ export default {
     BlockList
   },
   setup() {
-    const { addDefaultGroup, isDefaultGroupId, isAllGroupId, isRefresh, selectedGroup } = useBlock()
+    // const { addDefaultGroup, isDefaultGroupId, isAllGroupId, isRefresh, selectedGroup } = useBlock()
+    const { isDefaultGroupId, isAllGroupId, isRefresh, selectedGroup } = useBlock()
     const { resState } = useResource()
     const { message } = useModal()
-    const appId = useApp().appInfoState.selectedId
+    // const appId = useApp().appInfoState.selectedId
 
     const state = reactive({
       searchValue: '',
@@ -115,16 +118,16 @@ export default {
     )
 
     onMounted(() => {
-      fetchGroups(appId)
-        .then((data) => {
-          const groups = addDefaultGroup(data)
-          state.groups.push(...groups)
-
-          fetchBlocks()
-        })
-        .catch((error) => {
-          message({ message: `获取区块列表失败: ${error.message || error}`, status: 'error' })
-        })
+      // libin
+      // fetchGroups(appId)
+      //   .then((data) => {
+      //     const groups = addDefaultGroup(data)
+      //     state.groups.push(...groups)
+      //     fetchBlocks()
+      //   })
+      //   .catch((error) => {
+      //     message({ message: `获取区块列表失败: ${error.message || error}`, status: 'error' })
+      //   })
     })
 
     return {

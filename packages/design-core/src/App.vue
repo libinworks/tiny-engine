@@ -103,7 +103,7 @@ export default {
       fetchGroups(appId)
         .then((groups) => {
           const blocks = []
-          groups.forEach((group) => {
+          groups?.forEach((group) => {
             blocks.push(...group.blocks)
           })
           requestInitBlocks(blocks)

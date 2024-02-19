@@ -103,7 +103,6 @@ export default {
         componentName: pageState.pageSchema.componentName
       }
 
-      window.parent.postMessage({ type: 'tiny-engine', value }, '*');
       useCanvas().initData(value, pageState.currentPage)
       useHistory().addHistory()
       state.pageData = ''

@@ -8,8 +8,7 @@
       <component :is="item.component" v-for="item in centerBar" :key="item.id"></component>
     </div>
     <div class="toolbar-right">
-      <!-- libin -->
-      <!-- <component :is="item.component" v-for="item in rightBar" :key="item.id"></component> -->
+      <component :is="item.component" v-for="item in rightBar" :key="item.id"></component>
     </div>
   </div>
   <div class="progress">

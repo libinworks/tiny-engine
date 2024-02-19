@@ -16,8 +16,8 @@
 
 <script>
 import { Popover } from '@opentiny/vue'
-import { previewPage, previewBlock } from '@opentiny/tiny-engine-common/js/preview'
-import { getGlobalConfig, useBlock, useCanvas, useLayout, useNotify } from '@opentiny/tiny-engine-controller'
+// import { previewPage, previewBlock } from '@opentiny/tiny-engine-common/js/preview'
+// import { getGlobalConfig, useBlock, useCanvas, useLayout, useNotify } from '@opentiny/tiny-engine-controller'
 import { getSchema } from '@opentiny/tiny-engine-canvas'
 
 export default {
@@ -31,39 +31,45 @@ export default {
     }
   },
   setup() {
-    const { isBlock, getCurrentPage } = useCanvas()
-    const { getCurrentBlock } = useBlock()
+    // const { isBlock, getCurrentPage } = useCanvas()
+    // const { getCurrentBlock } = useBlock()
 
+    // libin
     const preview = () => {
-      if (useLayout().isEmptyPage()) {
-        useNotify({
-          type: 'warning',
-          message: '请先创建页面'
-        })
-
-        return
-      }
-
-      const params = {
-        framework: getGlobalConfig()?.dslMode,
-        platform: getGlobalConfig()?.platformId,
-        pageInfo: {
-          schema: getSchema()
-        }
-      }
-
-      if (isBlock()) {
-        const block = getCurrentBlock()
-        params.id = block?.id
-        params.pageInfo.name = block?.label
-        previewBlock(params)
-      } else {
-        const page = getCurrentPage()
-        params.id = page?.id
-        params.pageInfo.name = page?.name
-        previewPage(params)
-      }
+      const pageSchema = JSON.parse(JSON.stringify(getSchema(), null, 2))
+      window.parent.postMessage({ type: 'tiny-engine-preview', value: pageSchema }, '*')
     }
+
+    // const preview = () => {
+    //   if (useLayout().isEmptyPage()) {
+    //     useNotify({
+    //       type: 'warning',
+    //       message: '请先创建页面'
+    //     })
+
+    //     return
+    //   }
+
+    //   const params = {
+    //     framework: getGlobalConfig()?.dslMode,
+    //     platform: getGlobalConfig()?.platformId,
+    //     pageInfo: {
+    //       schema: getSchema()
+    //     }
+    //   }
+
+    //   if (isBlock()) {
+    //     const block = getCurrentBlock()
+    //     params.id = block?.id
+    //     params.pageInfo.name = block?.label
+    //     previewBlock(params)
+    //   } else {
+    //     const page = getCurrentPage()
+    //     params.id = page?.id
+    //     params.pageInfo.name = page?.name
+    //     previewPage(params)
+    //   }
+    // }
 
     return {
       preview

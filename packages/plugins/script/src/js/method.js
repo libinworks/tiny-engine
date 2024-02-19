@@ -100,7 +100,7 @@ const saveMethods = () => {
   getSchema().methods = {}
 
   ast.program.body.forEach((declaration, index) => {
-    const name = declaration?.id?.name
+    const name = declaration?.id?.name || 'createVm'
 
     // 前一个方法的尾部注释和后一个方法的头部注释指向相同引用时，删除尾部注释, 解决注释重复生成问题
     if (
