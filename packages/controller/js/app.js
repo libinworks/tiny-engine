@@ -10,20 +10,13 @@
  *
  */
 
-export function getConfig(env = import.meta.env) {
-  const baseURL = env.VITE_ORIGIN
-
-  // 仅在本地开发时，启用 withCredentials
-  const dev = env.MODE?.includes('dev')
-
-  // 获取租户 id
-  const getTenant = () => new URLSearchParams(location.search).get('tenant')
-  return {
-    baseURL,
-    withCredentials: false,
-    headers: {
-      'x-lowcode-mode': dev ? 'develop' : null,
-      'x-lowcode-org': getTenant()
-    }
+export const EXTEND_CONFIG = {
+  TYPE: {
+    CONSOLE: 'console',
+    MOBILE: 'mobile',
+    BUG_SCREEN: 'bigScreen',
+    PRICE_CALCULATOR: 'priceCalculator',
+    TAIHU: 'taihu',
+    COMMON: 'common'
   }
 }

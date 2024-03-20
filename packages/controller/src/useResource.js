@@ -14,9 +14,8 @@ import { reactive } from 'vue'
 import { getGlobalConfig } from './globalConfig'
 import { useHttp } from '@opentiny/tiny-engine-http'
 import { utils, constants } from '@opentiny/tiny-engine-utils'
-import { Builtin, addScript, addStyle, canvasDispatch } from '@opentiny/tiny-engine-canvas'
-import { getCanvasStatus } from '@opentiny/tiny-engine-common/js/index'
 import { meta as BuiltinComponentMaterials } from '@opentiny/tiny-engine-builtin-component'
+import { getCanvasStatus } from '../js/canvas'
 import useApp from './useApp'
 import useCanvas from './useCanvas'
 import useTranslate from './useTranslate'
@@ -139,6 +138,7 @@ const registerBlock = async (data, notFetchResouce) => {
     return block
   } else {
     if (!blockResource.get(label)) {
+      const { addScript, addStyle } = useCanvas().renderer.value
       const promises = scripts
         .filter((item) => item.includes('umd.js'))
         .map(addScript)
@@ -250,13 +250,15 @@ const fetchMaterial = async () => {
   const { dslMode, canvasOptions } = getGlobalConfig()
   const bundleUrls = canvasOptions[dslMode].material
   // libin
-  const materials = await Promise.allSettled(bundleUrls.map((url) => {
-    if (typeof url === 'string') {
+  const materials = await Promise.allSettled(
+    bundleUrls.map((url) => {
+      if (typeof url === 'string') {
         http.get(url)
-    } else {
+      } else {
         return url
-    }
-  }))
+      }
+    })
+  )
 
   materials.forEach((response) => {
     if (response.status === 'fulfilled' && response.value.materials) {
@@ -380,6 +382,7 @@ const fetchResource = async ({ isInit = true } = {}) => {
   const { id, type } = useEditorInfo().useInfo()
   useApp().appInfoState.selectedId = id
 
+  const Builtin = window.Builtin
   Builtin.data.materials.components[0].children.map(registerComponent)
   BuiltinComponentMaterials.components[0].children.map(registerComponent)
 
@@ -392,7 +395,7 @@ const fetchResource = async ({ isInit = true } = {}) => {
 
   // const appData = await useHttp().get(`/app-center/v1/api/apps/schema/${id}`)
   // libin
-  const appData = AppData;
+  const appData = AppData
   resState.pageTree = appData.componentsTree
   resState.dataSource = appData.dataSource?.list
   resState.dataHandler = appData.dataSource?.dataHandler || DEFAULT_INTERCEPTOR.dataHandler
@@ -461,7 +464,7 @@ const updateCanvasDependencies = (blocks) => {
     getBlockDeps(block.content.dependencies)
   })
 
-  canvasDispatch('updateDependencies', { detail: resState.thirdPartyDeps })
+  useCanvas().renderer.value?.canvasDispatch('updateDependencies', { detail: resState.thirdPartyDeps })
 }
 
 export default function () {
