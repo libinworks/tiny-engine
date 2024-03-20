@@ -41,7 +41,7 @@ import { Search, Tree, Collapse, CollapseItem } from '@opentiny/vue'
 import { IconFolderOpened, IconFolderClosed } from '@opentiny/vue-icon'
 import { useCanvas, useApp, useModal, usePage, useBreadcrumb, useLayout } from '@opentiny/tiny-engine-controller'
 import { isEqual } from '@opentiny/vue-renderless/common/object'
-import { getCanvasStatus } from '@opentiny/tiny-engine-common/js/index'
+import { getCanvasStatus } from '@opentiny/tiny-engine-controller/js/canvas'
 import { constants } from '@opentiny/tiny-engine-utils'
 import { closePageSettingPanel } from './PageSetting.vue'
 import { closeFolderSettingPanel } from './PageFolderSetting.vue'
@@ -498,13 +498,6 @@ export default {
       margin-left: 12px;
       margin-right: 6px;
     }
-  }
-}
-
-:deep(.tiny-svg, #tiny-engine .tiny-svg) {
-  transform: rotate(270deg);
-  &.is-active {
-    transform: rotate(180deg);
   }
 }
 </style>
