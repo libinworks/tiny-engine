@@ -107,7 +107,7 @@ import { Select as TinySelect } from '@opentiny/vue'
 import { setPageCss, getSchema as getCanvasPageSchema, updateRect } from '@opentiny/tiny-engine-canvas'
 import { useProperties, useCanvas, useHistory, useHelp } from '@opentiny/tiny-engine-controller'
 import { MetaCodeEditor, LinkButton } from '@opentiny/tiny-engine-common'
-import { formatString } from '@opentiny/tiny-engine-common/js/ast'
+import { formatString } from '@opentiny/tiny-engine-controller/js/ast'
 import useStyle, { updateGlobalStyleStr } from '../../js/useStyle'
 import { stringify, getSelectorArr } from '../../js/parser'
 
@@ -218,7 +218,7 @@ const editClassName = (curClassName, optionType = OPTION_TYPE.ADD, oldSelector =
 
       res = `${typeMap[type] ?? ''} ${newClassNames}`
     } else {
-      // 前后两种类型一直，替换原类型就好
+      // 前后两种类型一致，替换原类型就好
       res = typeMap[type]
         .split(' ')
         .map((item) => {
@@ -235,6 +235,10 @@ const editClassName = (curClassName, optionType = OPTION_TYPE.ADD, oldSelector =
   }
 
   const addSelectorHandler = () => {
+    if (type === SELECTOR_TYPE.ID) {
+      return newClassNames
+    }
+
     return `${typeMap[type] ?? ''} ${newClassNames}`
   }
 

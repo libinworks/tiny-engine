@@ -13,7 +13,7 @@
 import * as Vue from 'vue'
 import * as VueI18n from 'vue-i18n'
 import { addScript, addStyle, dynamicImportComponents, updateDependencies } from '../common'
-import TinyI18nHost, { I18nInjectionKey } from '@opentiny/tiny-engine-common/js/i18n'
+import TinyI18nHost, { I18nInjectionKey } from '@opentiny/tiny-engine-controller/js/i18n'
 import * as TinyWebcomponentCore from '@opentiny/tiny-engine-webcomponent-core'
 import TinyVue from '@opentiny/vue'
 import * as TinyVueIcon from '@opentiny/vue-icon'
@@ -23,7 +23,7 @@ import lowcode from '../../lowcode'
 import { camelize, capitalize } from '@vue/shared'
 
 const dispatch = (name, data) => {
-  const iframe = window.parent.frames['lowCode'] || window.parent;
+  const iframe = window.parent.frames['lowCode'] || window.parent
   iframe.document.dispatchEvent(new CustomEvent(name, data))
 }
 

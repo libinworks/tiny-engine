@@ -51,6 +51,7 @@
       </li>
       <!-- libin -->
       <!-- <li
+        v-if="state.independence"
         :key="state.bottomNavLists.length + 1"
         :class="['list-item']"
         :title="state.independence.title"
