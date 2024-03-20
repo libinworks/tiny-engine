@@ -14,8 +14,8 @@
   "scripts": {
     "dev": "cross-env NODE_OPTIONS=--max-old-space-size=10240 VITE_API_MOCK=mock vite",
     "serve": "cross-env NODE_OPTIONS=--max-old-space-size=10240 vite",
-    "build:alpha": "cross-env NODE_OPTIONS=--max-old-space-size=8192 vite build --mode alpha",
-    "build:prod": "cross-env NODE_OPTIONS=--max-old-space-size=8192 vite build --mode prod",
+    "build:alpha": "cross-env NODE_OPTIONS=--max-old-space-size=4096 vite build --mode alpha",
+    "build:prod": "cross-env NODE_OPTIONS=--max-old-space-size=4096 vite build --mode prod",
     "preview": "vite preview",
     "lint": "eslint . --ext .js,.vue,.jsx --fix"
   },
